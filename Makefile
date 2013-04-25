@@ -39,7 +39,7 @@ PHANTOMJS = phantomjs
 
 all: library docs
 
-clean: clean-library clean-docs
+clean: clean-library clean-docs clean-archives
 
 library: library-dirs affresco_css run_jshint affresco_js
 
@@ -137,7 +137,7 @@ test:
 
 #
 # WATCH LESS FILES
-# todo: use intotifywait if watchr not available?
+# todo: use inotifywait if watchr not available?
 #
 
 watch:
