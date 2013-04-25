@@ -212,6 +212,28 @@ a:focus {
   -o-border-radius: 500px;
   border-radius: 500px; }
 
+.row {
+  margin-left: -20px;
+  *zoom: 1;
+  width: 960px; }
+  .row:before, .row:after {
+    display: table;
+    content: "";
+    line-height: 0; }
+  .row:after {
+    clear: both; }
+
+[class*="span"] {
+  float: left;
+  min-height: 1px;
+  margin-left: 20px; }
+
+.container,
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 940px; }
+
 .span1 {
   width: 60px; }
 
@@ -284,27 +306,6 @@ a:focus {
 .offset12 {
   margin-left: 980px; }
 
-.row {
-  margin-left: -20px;
-  *zoom: 1; }
-  .row:before, .row:after {
-    display: table;
-    content: "";
-    line-height: 0; }
-  .row:after {
-    clear: both; }
-
-[class*="span"] {
-  float: left;
-  min-height: 1px;
-  margin-left: 20px; }
-
-.container,
-.navbar-static-top .container,
-.navbar-fixed-top .container,
-.navbar-fixed-bottom .container {
-  width: 940px; }
-
 .row-fluid {
   width: 100%;
   *zoom: 1; }
@@ -314,7 +315,7 @@ a:focus {
     line-height: 0; }
   .row-fluid:after {
     clear: both; }
-  .row-fluid [class*=" span"], .row-fluid [class^="span"] {
+  .row-fluid [class*="span"] {
     display: block;
     width: 100%;
     min-height: 30px;
@@ -324,8 +325,10 @@ a:focus {
     float: left;
     margin-left: 2.12766%;
     *margin-left: 2.07447%; }
-    .row-fluid [class*=" span"]:first-child, .row-fluid [class^="span"]:first-child {
+    .row-fluid [class*="span"]:first-child {
       margin-left: 0; }
+  .row-fluid .controls-row [class*="span"] + [class*="span"] {
+    margin-left: 2.12766%; }
   .row-fluid .span1 {
     width: 6.38298%;
     *width: 6.32979%; }
@@ -434,20 +437,13 @@ a:focus {
   .row-fluid .offset12:first-child {
     margin-left: 102.12766%;
     *margin-left: 102.02128%; }
-  .row-fluid .controls-row [class*=" span"] + [class^="span"],
-  .row-fluid .controls-row [class^="span"] + [class^="span"],
-  .row-fluid .controls-row [class*=" span"] + [class*=" span"],
-  .row-fluid .controls-row [class^="span"] + [class*=" span"] {
-    margin-left: 2.12766%; }
 
-.row-fluid [class*=" span"] .hide, .row-fluid [class^="span"] .hide {
+[class*="span"].hide,
+.row-fluid [class*="span"].hide {
   display: none; }
-.row-fluid [class*=" span"] .pull-right, .row-fluid [class^="span"] .pull-right {
-  float: right; }
 
-[class*=" span"] .hide, [class^="span"] .hide {
-  display: none; }
-[class*=" span"] .pull-right, [class^="span"] .pull-right {
+[class*="span"].pull-right,
+.row-fluid [class*="span"].pull-right {
   float: right; }
 
 .container {
