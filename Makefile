@@ -23,6 +23,10 @@ AFFRESCO_JS_SOURCES = \
 	js/bootstrap-tooltip.js \
 	js/bootstrap-transition.js \
 	js/bootstrap-typeahead.js
+DISTRIB_TMP = .tmp
+DISTRIB_DIR = affresco
+DISTRIB_ZIP = docs/assets/affresco.zip
+DISTRIB_TARBALL = docs/assets/affresco.tar.gz
 DATE=$(shell date +%I:%M%p)
 
 
@@ -76,6 +80,34 @@ docs: library
 
 clean-docs:
 	@echo "Removing the docs"
+
+
+archives: $(DISTRIB_ZIP) $(DISTRIB_TARBALL)
+
+clean-archives:
+	rm -f $(DISTRIB_ZIP) $(DISTRIB_TARBALL)
+	rm -rf $(DISTRIB_DIR)
+
+$(DISTRIB_DIR):
+	mkdir -p $(DISTRIB_TMP)/$(DISTRIB_DIR)
+	mkdir -p $(DISTRIB_TMP)/$(DISTRIB_DIR)/css
+	mkdir -p $(DISTRIB_TMP)/$(DISTRIB_DIR)/js
+	cp -t $(DISTRIB_TMP)/$(DISTRIB_DIR) CHANGELOG.md LICENSE README.md
+	cp -t $(DISTRIB_TMP)/$(DISTRIB_DIR)/css/ $(AFFRESCO_CSS)
+	cp -t $(DISTRIB_TMP)/$(DISTRIB_DIR)/css/ $(AFFRESCO_MIN_CSS)
+	cp -t $(DISTRIB_TMP)/$(DISTRIB_DIR)/js/ $(AFFRESCO_JS)
+	cp -t $(DISTRIB_TMP)/$(DISTRIB_DIR)/js/ $(AFFRESCO_MIN_JS)
+
+$(DISTRIB_ZIP): library $(DISTRIB_DIR)
+	rm -f $@
+	cd $(DISTRIB_TMP) && zip -r $(DISTRIB_DIR).zip $(DISTRIB_DIR)
+	mv $(DISTRIB_TMP)/$(DISTRIB_DIR).zip $@
+
+$(DISTRIB_TARBALL): library $(DISTRIB_DIR)
+	rm -f $@
+	cd $(DISTRIB_TMP) && tar czvf $(DISTRIB_DIR).tar.gz $(DISTRIB_DIR)
+	mv $(DISTRIB_TMP)/$(DISTRIB_DIR).tar.gz $@
+
 
 
 #
