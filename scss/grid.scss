@@ -1,0 +1,122 @@
+//
+// Grid system
+// --------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+// Fixed (940px)
+//------------------------------------------------------------------------------
+
+@mixin offset ($columns) {
+    margin-left: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns + 1));
+}
+@mixin span ($columns) {
+    width: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1));
+}
+
+@for $i from 1 through $gridColumns {
+    .span#{$i} {
+        @include span($i);
+    }
+    .offset#{$i} {
+        @include offset($i);
+    }
+}
+
+.row {
+    margin-left: $gridGutterWidth * -1;
+    @include clearfix();
+}
+
+[class*="span"] {
+    float: left;
+    min-height: 1px; // prevent collapsing columns
+    margin-left: $gridGutterWidth;
+}
+
+// Set the container width, and override it for fixed navbars in media queries
+.container,
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+    @include span($gridColumns);
+}
+
+
+//------------------------------------------------------------------------------
+// Fluid (940px)
+//------------------------------------------------------------------------------
+
+@mixin offset-fluid($columns) {
+    margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) + ($fluidGridGutterWidth * 2);
+    // *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%) + ($fluidGridGutterWidth*2) - (.5 / $gridRowWidth * 100 * 1%);
+    *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (50px / $gridRowWidth) + ($fluidGridGutterWidth * 2) - (50px / $gridRowWidth);
+}
+
+@mixin offsetFirstChild-fluid($columns) {
+    margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) + ($fluidGridGutterWidth);
+    // *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%) + $fluidGridGutterWidth - (.5 / $gridRowWidth * 100 * 1%);
+    *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (50px / $gridRowWidth) + $fluidGridGutterWidth - (50px / $gridRowWidth);
+}
+
+@mixin span-fluid($columns) {
+    width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1));
+    //*width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%);
+    *width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (50px / $gridRowWidth);
+}
+
+.row-fluid {
+    width: 100%;
+    @include clearfix();
+    [class*=" span"], [class^="span"] {
+        @include input-block-level();
+        float: left;
+        margin-left: $fluidGridGutterWidth;
+        *margin-left: $fluidGridGutterWidth - (50px / $gridRowWidth); // whut?
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    @for $i from 1 through $gridColumns {
+        .span#{$i} {
+            @include span-fluid($i);
+        }
+        .offset#{$i} {
+            @include offset-fluid($i);
+        }
+        .offset#{$i}:first-child {
+            @include offsetFirstChild-fluid($i);
+        }
+    }
+
+}
+
+// Space grid-sized controls properly if multiple per line
+.controls-row [class*=" span"] + [class^="span"],
+.controls-row [class^="span"]  + [class^="span"],
+.controls-row [class*=" span"] + [class*=" span"],
+.controls-row [class^="span"]  + [class*=" span"] {
+    margin-left: $fluidGridGutterWidth;
+}
+
+
+//------------------------------------------------------------------------------
+// Reset utility classes due to specificity
+//------------------------------------------------------------------------------
+@mixin row-fluid-class-fix {
+    [class*=" span"], [class^="span"] {
+        .hide {
+            display: none;
+        }
+        .pull-right {
+            float: right;
+        }
+    }
+}
+
+.row-fluid {
+    @include row-fluid-class-fix;
+}
+@include row-fluid-class-fix;
