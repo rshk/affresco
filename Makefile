@@ -1,163 +1,116 @@
-BOOTSTRAP = ./docs/assets/css/bootstrap.css
-BOOTSTRAP_LESS = ./less/bootstrap.less
-BOOTSTRAP_SCSS = ./scss/bootstrap.scss
-BOOTSTRAP_RESPONSIVE = ./docs/assets/css/bootstrap-responsive.css
-BOOTSTRAP_RESPONSIVE_LESS = ./less/responsive.less
-DATE=$(shell date +%I:%M%p)
-CHECK=\033[32m✔\033[39m
-HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+## Makefile for Affresco
 
-BOOTSTRAP_JS = \
-	js/bootstrap-transition.js \
+BUILD_DIR = build
+AFFRESCO_CSS = \
+	$(BUILD_DIR)/css/affresco.css \
+	$(BUILD_DIR)/css/affresco-responsive.css
+AFFRESCO_MIN_CSS = \
+	$(BUILD_DIR)/css/affresco.min.css \
+	$(BUILD_DIR)/css/affresco-responsive.min.css
+AFFRESCO_JS = $(BUILD_DIR)/js/affresco.js
+AFFRESCO_MIN_JS = $(BUILD_DIR)/js/affresco.min.js
+AFFRESCO_JS_SOURCES = \
+	js/bootstrap-affix.js \
 	js/bootstrap-alert.js \
 	js/bootstrap-button.js \
 	js/bootstrap-carousel.js \
 	js/bootstrap-collapse.js \
 	js/bootstrap-dropdown.js \
 	js/bootstrap-modal.js \
-	js/bootstrap-tooltip.js \
 	js/bootstrap-popover.js \
 	js/bootstrap-scrollspy.js \
 	js/bootstrap-tab.js \
-	js/bootstrap-typeahead.js \
-	js/bootstrap-affix.js
+	js/bootstrap-tooltip.js \
+	js/bootstrap-transition.js \
+	js/bootstrap-typeahead.js
+DATE=$(shell date +%I:%M%p)
 
 
 SCSS = scss --compass
 UGLIFYJS = ./node_modules/.bin/uglifyjs
 JSHINT = ./node_modules/.bin/jshint
+NODE = node
+PHANTOMJS = phantomjs
 
-#
-# BUILD DOCS
-#
 
-build:
-	@echo "\n${HR}"
-	@echo "Building Affresco..."
-	@echo "${HR}\n"
+all: library docs
 
+clean: clean-library clean-docs
+
+library: library-dirs affresco_css run_jshint affresco_js
+
+library-dirs:
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/css
+	mkdir -p $(BUILD_DIR)/js
+
+affresco_css: library-dirs $(AFFRESCO_CSS) $(AFFRESCO_MIN_CSS)
+
+affresco_js: library-dirs $(AFFRESCO_JS) $(AFFRESCO_MIN_JS)
+
+$(AFFRESCO_CSS): $(BUILD_DIR)/css/%.css: scss/%.scss
+	$(SCSS) $< > $@
+
+$(AFFRESCO_MIN_CSS): %.min.css: %.css
+	$(SCSS) -tcompressed $< > $@
+
+run_jshint:
 	$(JSHINT) js/*.js --config js/.jshintrc
 	$(JSHINT) js/tests/unit/*.js --config js/.jshintrc
-	@echo "Running JSHint on javascript...             ${CHECK} Done"
 
-	@#./node_modules/.bin/recess --compile ${BOOTSTRAP_LESS} > ${BOOTSTRAP}
-	@#./node_modules/.bin/recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_RESPONSIVE}
-	@#echo "Compiling LESS with Recess...               ${CHECK} Done"
-	$(SCSS) -tcompressed ${BOOTSTRAP_SCSS} > ${BOOTSTRAP}
-	@echo "Compiling SCSS with scss...                 ${CHECK} Done"
+$(AFFRESCO_JS): misc/js-copyright-note.txt $(AFFRESCO_JS_SOURCES)
+	cat misc/js-copyright-note.txt > $@
+	cat $(AFFRESCO_JS_SOURCES) >> $@
 
-	node docs/build
-	cp img/* docs/assets/img/
-	cp js/*.js docs/assets/js/
-	cp js/tests/vendor/jquery.js docs/assets/js/
-	@echo "Compiling documentation...                  ${CHECK} Done"
+%.min.js: %.js
+	$(UGLIFYJS) -nc $< > $@
 
-	cat $(BOOTSTRAP_JS) > docs/assets/js/bootstrap.js
-	$(UGLIFYJS) -nc docs/assets/js/bootstrap.js > docs/assets/js/bootstrap.min.tmp.js
+clean-library:
+	rm -rf $(BUILD_DIR)
 
-	cat misc/js-copyright-note.txt > docs/assets/js/copyright.js
+docs: library
+	$(NODE) docs/build
+	cp -t docs/assets/css/ $(BUILD_DIR)/css/*.css
+	cp -t docs/assets/js/ js/*.js
+	cp -t docs/assets/js/ js/tests/vendor/jquery.js
 
-	cat docs/assets/js/copyright.js docs/assets/js/bootstrap.min.tmp.js > docs/assets/js/bootstrap.min.js
-	rm docs/assets/js/copyright.js docs/assets/js/bootstrap.min.tmp.js
-	@echo "Compiling and minifying javascript...       ${CHECK} Done"
+clean-docs:
+	@echo "Removing the docs"
 
-	@echo "\n${HR}"
-	@echo "Bootstrap successfully built at ${DATE}."
-	@echo "${HR}\n"
-	@echo "Thanks for using Bootstrap,"
-	@echo "<3 @mdo and @fat\n"
 
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS
 #
 
 test:
-	./node_modules/.bin/jshint js/*.js --config js/.jshintrc
-	./node_modules/.bin/jshint js/tests/unit/*.js --config js/.jshintrc
-	node js/tests/server.js &
-	phantomjs js/tests/phantom.js "http://localhost:3000/js/tests"
+	$(JSHINT) js/*.js --config js/.jshintrc
+	$(JSHINT) js/tests/unit/*.js --config js/.jshintrc
+	$(NODE) js/tests/server.js &
+	$(PHANTOMJS) js/tests/phantom.js "http://localhost:3000/js/tests"
 	kill -9 `cat js/tests/pid.txt`
 	rm js/tests/pid.txt
-
-#
-# CLEANS THE ROOT DIRECTORY OF PRIOR BUILDS
-#
-
-clean:
-	rm -r bootstrap
-
-#
-# BUILD SIMPLE BOOTSTRAP DIRECTORY
-# recess & uglifyjs are required
-#
-
-bootstrap: bootstrap-img bootstrap-css bootstrap-js
-
-
-#
-# JS COMPILE
-#
-bootstrap-js: bootstrap/js/*.js
-
-bootstrap/js/*.js: js/*.js
-	mkdir -p bootstrap/js
-	cat js/bootstrap-transition.js js/bootstrap-alert.js js/bootstrap-button.js js/bootstrap-carousel.js js/bootstrap-collapse.js js/bootstrap-dropdown.js js/bootstrap-modal.js js/bootstrap-tooltip.js js/bootstrap-popover.js js/bootstrap-scrollspy.js js/bootstrap-tab.js js/bootstrap-typeahead.js js/bootstrap-affix.js > bootstrap/js/bootstrap.js
-	$(UGLIFYJS) -nc bootstrap/js/bootstrap.js > bootstrap/js/bootstrap.min.tmp.js
-	echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > bootstrap/js/copyright.js
-	cat bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js > bootstrap/js/bootstrap.min.js
-	rm bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js
-
-#
-# CSS COMPLILE
-#
-
-bootstrap-css: bootstrap/css/*.css
-
-# bootstrap/css/*.css: less/*.less
-# 	mkdir -p bootstrap/css
-# 	./node_modules/.bin/recess --compile ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.css
-# 	./node_modules/.bin/recess --compress ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.min.css
-# 	./node_modules/.bin/recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.css
-# 	./node_modules/.bin/recess --compress ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.min.css
-
-bootstrap/css/*.css: scss/*.scss
-	mkdir -p bootstrap/css
-	$(SCSS) ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.css
-	./node_modules/.bin/recess --compress ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.min.css
-	./node_modules/.bin/recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.css
-	./node_modules/.bin/recess --compress ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.min.css
-
-
-#
-# IMAGES
-#
-
-bootstrap-img: bootstrap/img/*
-
-bootstrap/img/*: img/*
-	mkdir -p bootstrap/img
-	cp img/* bootstrap/img/
 
 
 #
 # MAKE FOR GH-PAGES 4 FAT & MDO ONLY (O_O  )
 #
 
-gh-pages: bootstrap docs
-	rm -f docs/assets/bootstrap.zip
-	zip -r docs/assets/bootstrap.zip bootstrap
-	rm -r bootstrap
-	rm -f ../bootstrap-gh-pages/assets/bootstrap.zip
-	node docs/build production
-	cp -r docs/* ../bootstrap-gh-pages
+# gh-pages: library docs
+# 	rm -f docs/assets/bootstrap.zip
+# 	zip -r docs/assets/bootstrap.zip bootstrap
+# 	rm -r bootstrap
+# 	rm -f ../bootstrap-gh-pages/assets/bootstrap.zip
+# 	node docs/build production
+# 	cp -r docs/* ../bootstrap-gh-pages
 
 #
 # WATCH LESS FILES
+# todo: use intotifywait if watchr not available?
 #
 
 watch:
-	echo "Watching less files..."; \
+	@echo "Watching less files..."; \
 	watchr -e "watch('less/.*\.less') { system 'make' }"
 
 
-.PHONY: docs watch gh-pages bootstrap-img bootstrap-css bootstrap-js
+.PHONY: docs watch gh-pages library affresco_css affresco_js
