@@ -177,113 +177,113 @@
     .row-fluid .controls-row [class*="span"] + [class*="span"] {
       margin-left: 2.5641%; }
     .row-fluid .span1 {
-      width: 6.38298%;
-      *width: 6.32979%; }
+      width: 5.98291%;
+      *width: 5.92971%; }
     .row-fluid .offset1 {
-      margin-left: 10.6383%;
-      *margin-left: 10.53191%; }
+      margin-left: 11.11111%;
+      *margin-left: 11.00473%; }
     .row-fluid .offset1:first-child {
-      margin-left: 8.51064%;
-      *margin-left: 8.40426%; }
+      margin-left: 8.54701%;
+      *margin-left: 8.44063%; }
     .row-fluid .span2 {
-      width: 14.89362%;
-      *width: 14.84043%; }
+      width: 14.52991%;
+      *width: 14.47672%; }
     .row-fluid .offset2 {
-      margin-left: 19.14894%;
-      *margin-left: 19.04255%; }
+      margin-left: 19.65812%;
+      *margin-left: 19.55174%; }
     .row-fluid .offset2:first-child {
-      margin-left: 17.02128%;
-      *margin-left: 16.91489%; }
+      margin-left: 17.09402%;
+      *margin-left: 16.98763%; }
     .row-fluid .span3 {
-      width: 23.40426%;
-      *width: 23.35106%; }
+      width: 23.07692%;
+      *width: 23.02373%; }
     .row-fluid .offset3 {
-      margin-left: 27.65957%;
-      *margin-left: 27.55319%; }
+      margin-left: 28.20513%;
+      *margin-left: 28.09875%; }
     .row-fluid .offset3:first-child {
-      margin-left: 25.53191%;
-      *margin-left: 25.42553%; }
+      margin-left: 25.64103%;
+      *margin-left: 25.53464%; }
     .row-fluid .span4 {
-      width: 31.91489%;
-      *width: 31.8617%; }
+      width: 31.62393%;
+      *width: 31.57074%; }
     .row-fluid .offset4 {
-      margin-left: 36.17021%;
-      *margin-left: 36.06383%; }
+      margin-left: 36.75214%;
+      *margin-left: 36.64575%; }
     .row-fluid .offset4:first-child {
-      margin-left: 34.04255%;
-      *margin-left: 33.93617%; }
+      margin-left: 34.18803%;
+      *margin-left: 34.08165%; }
     .row-fluid .span5 {
-      width: 40.42553%;
-      *width: 40.37234%; }
+      width: 40.17094%;
+      *width: 40.11775%; }
     .row-fluid .offset5 {
-      margin-left: 44.68085%;
-      *margin-left: 44.57447%; }
+      margin-left: 45.29915%;
+      *margin-left: 45.19276%; }
     .row-fluid .offset5:first-child {
-      margin-left: 42.55319%;
-      *margin-left: 42.44681%; }
+      margin-left: 42.73504%;
+      *margin-left: 42.62866%; }
     .row-fluid .span6 {
-      width: 48.93617%;
-      *width: 48.88298%; }
+      width: 48.71795%;
+      *width: 48.66476%; }
     .row-fluid .offset6 {
-      margin-left: 53.19149%;
-      *margin-left: 53.08511%; }
+      margin-left: 53.84615%;
+      *margin-left: 53.73977%; }
     .row-fluid .offset6:first-child {
-      margin-left: 51.06383%;
-      *margin-left: 50.95745%; }
+      margin-left: 51.28205%;
+      *margin-left: 51.17567%; }
     .row-fluid .span7 {
-      width: 57.44681%;
-      *width: 57.39362%; }
+      width: 57.26496%;
+      *width: 57.21177%; }
     .row-fluid .offset7 {
-      margin-left: 61.70213%;
-      *margin-left: 61.59574%; }
+      margin-left: 62.39316%;
+      *margin-left: 62.28678%; }
     .row-fluid .offset7:first-child {
-      margin-left: 59.57447%;
-      *margin-left: 59.46809%; }
+      margin-left: 59.82906%;
+      *margin-left: 59.72268%; }
     .row-fluid .span8 {
-      width: 65.95745%;
-      *width: 65.90426%; }
+      width: 65.81197%;
+      *width: 65.75877%; }
     .row-fluid .offset8 {
-      margin-left: 70.21277%;
-      *margin-left: 70.10638%; }
+      margin-left: 70.94017%;
+      *margin-left: 70.83379%; }
     .row-fluid .offset8:first-child {
-      margin-left: 68.08511%;
-      *margin-left: 67.97872%; }
+      margin-left: 68.37607%;
+      *margin-left: 68.26969%; }
     .row-fluid .span9 {
-      width: 74.46809%;
-      *width: 74.41489%; }
+      width: 74.35897%;
+      *width: 74.30578%; }
     .row-fluid .offset9 {
-      margin-left: 78.7234%;
-      *margin-left: 78.61702%; }
+      margin-left: 79.48718%;
+      *margin-left: 79.3808%; }
     .row-fluid .offset9:first-child {
-      margin-left: 76.59574%;
-      *margin-left: 76.48936%; }
+      margin-left: 76.92308%;
+      *margin-left: 76.81669%; }
     .row-fluid .span10 {
-      width: 82.97872%;
-      *width: 82.92553%; }
+      width: 82.90598%;
+      *width: 82.85279%; }
     .row-fluid .offset10 {
-      margin-left: 87.23404%;
-      *margin-left: 87.12766%; }
+      margin-left: 88.03419%;
+      *margin-left: 87.92781%; }
     .row-fluid .offset10:first-child {
-      margin-left: 85.10638%;
-      *margin-left: 85.0%; }
+      margin-left: 85.47009%;
+      *margin-left: 85.3637%; }
     .row-fluid .span11 {
-      width: 91.48936%;
-      *width: 91.43617%; }
+      width: 91.45299%;
+      *width: 91.3998%; }
     .row-fluid .offset11 {
-      margin-left: 95.74468%;
-      *margin-left: 95.6383%; }
+      margin-left: 96.5812%;
+      *margin-left: 96.47481%; }
     .row-fluid .offset11:first-child {
-      margin-left: 93.61702%;
-      *margin-left: 93.51064%; }
+      margin-left: 94.01709%;
+      *margin-left: 93.91071%; }
     .row-fluid .span12 {
       width: 100%;
       *width: 99.94681%; }
     .row-fluid .offset12 {
-      margin-left: 104.25532%;
-      *margin-left: 104.14894%; }
+      margin-left: 105.12821%;
+      *margin-left: 105.02182%; }
     .row-fluid .offset12:first-child {
-      margin-left: 102.12766%;
-      *margin-left: 102.02128%; }
+      margin-left: 102.5641%;
+      *margin-left: 102.45772%; }
 
   input.span1,
   textarea.span1,
@@ -479,113 +479,113 @@
     .row-fluid .controls-row [class*="span"] + [class*="span"] {
       margin-left: 2.76243%; }
     .row-fluid .span1 {
-      width: 6.38298%;
-      *width: 6.32979%; }
+      width: 5.8011%;
+      *width: 5.74791%; }
     .row-fluid .offset1 {
-      margin-left: 10.6383%;
-      *margin-left: 10.53191%; }
+      margin-left: 11.32597%;
+      *margin-left: 11.21958%; }
     .row-fluid .offset1:first-child {
-      margin-left: 8.51064%;
-      *margin-left: 8.40426%; }
+      margin-left: 8.56354%;
+      *margin-left: 8.45715%; }
     .row-fluid .span2 {
-      width: 14.89362%;
-      *width: 14.84043%; }
+      width: 14.36464%;
+      *width: 14.31145%; }
     .row-fluid .offset2 {
-      margin-left: 19.14894%;
-      *margin-left: 19.04255%; }
+      margin-left: 19.8895%;
+      *margin-left: 19.78312%; }
     .row-fluid .offset2:first-child {
-      margin-left: 17.02128%;
-      *margin-left: 16.91489%; }
+      margin-left: 17.12707%;
+      *margin-left: 17.02069%; }
     .row-fluid .span3 {
-      width: 23.40426%;
-      *width: 23.35106%; }
+      width: 22.92818%;
+      *width: 22.87499%; }
     .row-fluid .offset3 {
-      margin-left: 27.65957%;
-      *margin-left: 27.55319%; }
+      margin-left: 28.45304%;
+      *margin-left: 28.34666%; }
     .row-fluid .offset3:first-child {
-      margin-left: 25.53191%;
-      *margin-left: 25.42553%; }
+      margin-left: 25.69061%;
+      *margin-left: 25.58422%; }
     .row-fluid .span4 {
-      width: 31.91489%;
-      *width: 31.8617%; }
+      width: 31.49171%;
+      *width: 31.43852%; }
     .row-fluid .offset4 {
-      margin-left: 36.17021%;
-      *margin-left: 36.06383%; }
+      margin-left: 37.01657%;
+      *margin-left: 36.91019%; }
     .row-fluid .offset4:first-child {
-      margin-left: 34.04255%;
-      *margin-left: 33.93617%; }
+      margin-left: 34.25414%;
+      *margin-left: 34.14776%; }
     .row-fluid .span5 {
-      width: 40.42553%;
-      *width: 40.37234%; }
+      width: 40.05525%;
+      *width: 40.00206%; }
     .row-fluid .offset5 {
-      margin-left: 44.68085%;
-      *margin-left: 44.57447%; }
+      margin-left: 45.58011%;
+      *margin-left: 45.47373%; }
     .row-fluid .offset5:first-child {
-      margin-left: 42.55319%;
-      *margin-left: 42.44681%; }
+      margin-left: 42.81768%;
+      *margin-left: 42.7113%; }
     .row-fluid .span6 {
-      width: 48.93617%;
-      *width: 48.88298%; }
+      width: 48.61878%;
+      *width: 48.56559%; }
     .row-fluid .offset6 {
-      margin-left: 53.19149%;
-      *margin-left: 53.08511%; }
+      margin-left: 54.14365%;
+      *margin-left: 54.03726%; }
     .row-fluid .offset6:first-child {
-      margin-left: 51.06383%;
-      *margin-left: 50.95745%; }
+      margin-left: 51.38122%;
+      *margin-left: 51.27483%; }
     .row-fluid .span7 {
-      width: 57.44681%;
-      *width: 57.39362%; }
+      width: 57.18232%;
+      *width: 57.12913%; }
     .row-fluid .offset7 {
-      margin-left: 61.70213%;
-      *margin-left: 61.59574%; }
+      margin-left: 62.70718%;
+      *margin-left: 62.6008%; }
     .row-fluid .offset7:first-child {
-      margin-left: 59.57447%;
-      *margin-left: 59.46809%; }
+      margin-left: 59.94475%;
+      *margin-left: 59.83837%; }
     .row-fluid .span8 {
-      width: 65.95745%;
-      *width: 65.90426%; }
+      width: 65.74586%;
+      *width: 65.69266%; }
     .row-fluid .offset8 {
-      margin-left: 70.21277%;
-      *margin-left: 70.10638%; }
+      margin-left: 71.27072%;
+      *margin-left: 71.16434%; }
     .row-fluid .offset8:first-child {
-      margin-left: 68.08511%;
-      *margin-left: 67.97872%; }
+      margin-left: 68.50829%;
+      *margin-left: 68.4019%; }
     .row-fluid .span9 {
-      width: 74.46809%;
-      *width: 74.41489%; }
+      width: 74.30939%;
+      *width: 74.2562%; }
     .row-fluid .offset9 {
-      margin-left: 78.7234%;
-      *margin-left: 78.61702%; }
+      margin-left: 79.83425%;
+      *margin-left: 79.72787%; }
     .row-fluid .offset9:first-child {
-      margin-left: 76.59574%;
-      *margin-left: 76.48936%; }
+      margin-left: 77.07182%;
+      *margin-left: 76.96544%; }
     .row-fluid .span10 {
-      width: 82.97872%;
-      *width: 82.92553%; }
+      width: 82.87293%;
+      *width: 82.81974%; }
     .row-fluid .offset10 {
-      margin-left: 87.23404%;
-      *margin-left: 87.12766%; }
+      margin-left: 88.39779%;
+      *margin-left: 88.29141%; }
     .row-fluid .offset10:first-child {
-      margin-left: 85.10638%;
-      *margin-left: 85.0%; }
+      margin-left: 85.63536%;
+      *margin-left: 85.52898%; }
     .row-fluid .span11 {
-      width: 91.48936%;
-      *width: 91.43617%; }
+      width: 91.43646%;
+      *width: 91.38327%; }
     .row-fluid .offset11 {
-      margin-left: 95.74468%;
-      *margin-left: 95.6383%; }
+      margin-left: 96.96133%;
+      *margin-left: 96.85494%; }
     .row-fluid .offset11:first-child {
-      margin-left: 93.61702%;
-      *margin-left: 93.51064%; }
+      margin-left: 94.1989%;
+      *margin-left: 94.09251%; }
     .row-fluid .span12 {
       width: 100%;
       *width: 99.94681%; }
     .row-fluid .offset12 {
-      margin-left: 104.25532%;
-      *margin-left: 104.14894%; }
+      margin-left: 105.52486%;
+      *margin-left: 105.41848%; }
     .row-fluid .offset12:first-child {
-      margin-left: 102.12766%;
-      *margin-left: 102.02128%; }
+      margin-left: 102.76243%;
+      *margin-left: 102.65605%; }
 
   input.span1,
   textarea.span1,
