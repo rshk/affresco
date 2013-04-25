@@ -2,6 +2,13 @@
 <!-- # [Bootstrap v2.3.1](http://twitter.github.com/bootstrap) [![Build Status](https://secure.travis-ci.org/twitter/bootstrap.png)](http://travis-ci.org/twitter/bootstrap) -->
 
 
+**Note:** Big Red Warning: this thing is still very much experimental,
+so feel free to star and have a look at the code, or contribute with
+some ideas, but *do not* use it in production yet (and be careful with pull
+requests too, as many stuff is likely to change quickly, and as such your
+commits might become too old to be integrated easily..)
+
+
 
 See the bottom of the README for info about the fork.
 
