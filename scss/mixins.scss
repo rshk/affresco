@@ -507,9 +507,8 @@
 }
 
 
-
-// // Grid System
-// // -----------
+// Grid System
+// -----------
 
 // Centered container element
 @mixin container-fixed() {
@@ -521,156 +520,168 @@
 // Table columns
 @mixin tableColumns($columnSpan: 1) {
     float: none; // undo default grid column styles
-    width: (($gridColumnWidth) * $columnSpan) + ($gridGutterWidth * ($columnSpan - 1)) - 16; // 16 is total padding on left and right of table cells
+    width:
+        (($gridColumnWidth) * $columnSpan)
+        + ($gridGutterWidth * ($columnSpan - 1))
+        - 16; // 16 is total padding on left and right of table cells
     margin-left: 0; // undo default grid column styles
 }
 
-// // Make a Grid
-// // Use .makeRow and .makeColumn to assign semantic layouts grid system behavior
-// .makeRow() {
-//   margin-left: @gridGutterWidth * -1;
-//   .clearfix();
-// }
-// .makeColumn(@columns: 1, @offset: 0) {
-//   float: left;
-//   margin-left: (@gridColumnWidth * @offset) + (@gridGutterWidth * (@offset - 1)) + (@gridGutterWidth * 2);
-//   width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
-// }
+// Make a Grid
+// Use .makeRow and .makeColumn to assign semantic layouts grid system behavior
+@mixin makeRow() {
+    margin-left: $gridGutterWidth * -1;
+    @include clearfix();
+}
+
+@mixin makeColumn($columns: 1, $offset: 0) {
+    float: left;
+    margin-left:
+        ($gridColumnWidth * $offset)
+        + ($gridGutterWidth * ($offset - 1))
+        + ($gridGutterWidth * 2);
+    width:
+        ($gridColumnWidth * $columns)
+        + ($gridGutterWidth * ($columns - 1));
+}
 
 
+@mixin grid-core($gridColumnWidth, $gridGutterWidth) {
+    .row {
+        margin-left: $gridGutterWidth * -1;
+        @include clearfix();
+    }
 
+    [class*="span"] {
+        float: left;
+        min-height: 1px; // prevent collapsing columns
+        margin-left: $gridGutterWidth;
+    }
 
-// The Grid
+    // Set the container width, and override it for fixed navbars
+    // in media queries
+    .container,
+    .navbar-static-top .container,
+    .navbar-fixed-top .container,
+    .navbar-fixed-bottom .container {
+        @include grid-core-span($gridColumns, $gridColumnWidth, $gridGutterWidth);
+    }
 
+    @for $index from 1 through $gridColumns {
+        .span#{$index} {
+            @include grid-core-span($index, $gridColumnWidth, $gridGutterWidth);
+        }
+        .offset#{$index} {
+            @include grid-core-offset($index, $gridColumnWidth, $gridGutterWidth);
+        }
+    }
 
+}
 
-// #grid {
+@mixin grid-core-span($columns, $colw: $gridColumnWidth, $colg: $gridGutterWidth) {
+    width: ($colw * $columns) + ($colg * ($columns - 1));
+}
 
-    // .core (@gridColumnWidth, @gridGutterWidth) {
+@mixin grid-core-offset($columns, $colw: $gridColumnWidth, $colg: $gridGutterWidth) {
+    margin-left: ($colw * $columns) + ($colg * ($columns + 1));
+}
 
-    //   .spanX (@index) when (@index > 0) {
-    //     .span@{index} { .span(@index); }
-    //     .spanX(@index - 1);
-    //   }
-    //   .spanX (0) {}
+@mixin grid-fluid ($fluidGridColumnWidth, $fluidGridGutterWidth) {
+    .row-fluid {
+        width: 100%;
+        @include clearfix();
 
-    //   .offsetX (@index) when (@index > 0) {
-    //     .offset@{index} { .offset(@index); }
-    //     .offsetX(@index - 1);
-    //   }
-    //   .offsetX (0) {}
+        [class*="span"] {
+            @include input-block-level();
+            float: left;
+            margin-left: $fluidGridGutterWidth;
+            // *margin-left: $fluidGridGutterWidth - (.5 / $gridRowWidth * 100 * 1%);
+            *margin-left: $fluidGridGutterWidth - (50px / $gridRowWidth);
+            &:first-child {
+                margin-left: 0;
+            }
+        }
 
-    //   .offset (@columns) {
-    //     margin-left: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns + 1));
-    //   }
+        // Space grid-sized controls properly if multiple per line
+        .controls-row [class*="span"] + [class*="span"] {
+            margin-left: $fluidGridGutterWidth;
+        }
 
-    //   .span (@columns) {
-    //     width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
-    //   }
+        @for $index from 1 through $gridColumns {
+            .span#{$index} {
+                @include grid-fluid-span($index);
+            }
+            .offset#{$index} {
+                @include grid-fluid-offset($index);
+            }
+            .offset#{$index}:first-child {
+                @include grid-fluid-offset-firstchild($index);
+            }
+        }
 
-    //   .row {
-    //     margin-left: @gridGutterWidth * -1;
-    //     .clearfix();
-    //   }
+    }
+}
 
-    //   [class*="span"] {
-    //     float: left;
-    //     min-height: 1px; // prevent collapsing columns
-    //     margin-left: @gridGutterWidth;
-    //   }
+@mixin grid-fluid-span($columns) {
+    width:
+        ($fluidGridColumnWidth * $columns)
+        + ($fluidGridGutterWidth * ($columns - 1));
+    // *width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%);
+    *width:
+        ($fluidGridColumnWidth * $columns)
+        + ($fluidGridGutterWidth * ($columns - 1))
+        - (50px / $gridRowWidth);
+}
 
-    //   // Set the container width, and override it for fixed navbars in media queries
-    //   .container,
-    //   .navbar-static-top .container,
-    //   .navbar-fixed-top .container,
-    //   .navbar-fixed-bottom .container { .span(@gridColumns); }
+@mixin grid-fluid-offset($columns) {
+    margin-left:
+        ($fluidGridColumnWidth * $columns)
+        + ($fluidGridGutterWidth * ($columns - 1))
+        + ($fluidGridGutterWidth*2);
+    // *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%) + ($fluidGridGutterWidth*2) - (.5 / $gridRowWidth * 100 * 1%);
+    *margin-left:
+        ($fluidGridColumnWidth * $columns)
+        + ($fluidGridGutterWidth * ($columns - 1))
+        - (50px / $gridRowWidth)
+        + ($fluidGridGutterWidth*2)
+        - (50px / $gridRowWidth);
+}
 
-    //   // generate .spanX and .offsetX
-    //   .spanX (@gridColumns);
-    //   .offsetX (@gridColumns);
+@mixin grid-fluid-offset-firstchild ($columns) {
+    margin-left:
+        ($fluidGridColumnWidth * $columns)
+        + ($fluidGridGutterWidth * ($columns - 1))
+        + ($fluidGridGutterWidth);
+    // *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%) + $fluidGridGutterWidth - (.5 / $gridRowWidth * 100 * 1%);
+    *margin-left:
+        ($fluidGridColumnWidth * $columns)
+        + ($fluidGridGutterWidth * ($columns - 1))
+        - (50px / $gridRowWidth)
+        + $fluidGridGutterWidth
+        - (50px / $gridRowWidth);
+}
 
-    // }
+@mixin grid-input($gridColumnWidth, $gridGutterWidth) {
+    @for $index from 1 through $gridColumns {
+        input.span#{$index},
+        textarea.span#{$index},
+        .uneditable-input.span#{$index} {
+            @include grind-input-span($index);
+        }
+    }
 
-//   .fluid (@fluidGridColumnWidth, @fluidGridGutterWidth) {
+    input,
+    textarea,
+    .uneditable-input {
+        margin-left: 0; // override margin-left from core grid system
+    }
 
-//     .spanX (@index) when (@index > 0) {
-//       .span@{index} { .span(@index); }
-//       .spanX(@index - 1);
-//     }
-//     .spanX (0) {}
+    // Space grid-sized controls properly if multiple per line
+    .controls-row [class*="span"] + [class*="span"] {
+        margin-left: $gridGutterWidth;
+    }
+}
 
-//     .offsetX (@index) when (@index > 0) {
-//       .offset@{index} { .offset(@index); }
-//       .offset@{index}:first-child { .offsetFirstChild(@index); }
-//       .offsetX(@index - 1);
-//     }
-//     .offsetX (0) {}
-
-//     .offset (@columns) {
-//       margin-left: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) + (@fluidGridGutterWidth*2);
-//       *margin-left: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%) + (@fluidGridGutterWidth*2) - (.5 / @gridRowWidth * 100 * 1%);
-//     }
-
-//     .offsetFirstChild (@columns) {
-//       margin-left: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) + (@fluidGridGutterWidth);
-//       *margin-left: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%) + @fluidGridGutterWidth - (.5 / @gridRowWidth * 100 * 1%);
-//     }
-
-//     .span (@columns) {
-//       width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1));
-//       *width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%);
-//     }
-
-//     .row-fluid {
-//       width: 100%;
-//       .clearfix();
-//       [class*="span"] {
-//         .input-block-level();
-//         float: left;
-//         margin-left: @fluidGridGutterWidth;
-//         *margin-left: @fluidGridGutterWidth - (.5 / @gridRowWidth * 100 * 1%);
-//       }
-//       [class*="span"]:first-child {
-//         margin-left: 0;
-//       }
-
-//       // Space grid-sized controls properly if multiple per line
-//       .controls-row [class*="span"] + [class*="span"] {
-//         margin-left: @fluidGridGutterWidth;
-//       }
-
-//       // generate .spanX and .offsetX
-//       .spanX (@gridColumns);
-//       .offsetX (@gridColumns);
-//     }
-
-//   }
-
-//   .input(@gridColumnWidth, @gridGutterWidth) {
-
-//     .spanX (@index) when (@index > 0) {
-//       input.span@{index}, textarea.span@{index}, .uneditable-input.span@{index} { .span(@index); }
-//       .spanX(@index - 1);
-//     }
-//     .spanX (0) {}
-
-//     .span(@columns) {
-//       width: ((@gridColumnWidth) * @columns) + (@gridGutterWidth * (@columns - 1)) - 14;
-//     }
-
-//     input,
-//     textarea,
-//     .uneditable-input {
-//       margin-left: 0; // override margin-left from core grid system
-//     }
-
-//     // Space grid-sized controls properly if multiple per line
-//     .controls-row [class*="span"] + [class*="span"] {
-//       margin-left: @gridGutterWidth;
-//     }
-
-//     // generate .spanX
-//     .spanX (@gridColumns);
-
-//   }
-// }
+@mixin grind-input-span($columns) {
+    width: (($gridColumnWidth) * $columns) + ($gridGutterWidth * ($columns - 1)) - 14;
+}
