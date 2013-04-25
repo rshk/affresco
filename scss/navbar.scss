@@ -196,7 +196,7 @@
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  @include span($gridColumns);
+  @include grid-span-fixed($gridColumns);
 }
 
 // Fixed to top
