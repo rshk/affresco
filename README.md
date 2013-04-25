@@ -1,8 +1,11 @@
-<a href="http://getbootstrap.com">
-  <img src="http://twitter.github.com/bootstrap/assets/img/bootstrap-docs-readme.png" width="100px">
-</a>
+# Affresco v0.1 (Bootstrap 2.3.1)
+<!-- # [Bootstrap v2.3.1](http://twitter.github.com/bootstrap) [![Build Status](https://secure.travis-ci.org/twitter/bootstrap.png)](http://travis-ci.org/twitter/bootstrap) -->
 
-# [Bootstrap v2.3.1](http://twitter.github.com/bootstrap) [![Build Status](https://secure.travis-ci.org/twitter/bootstrap.png)](http://travis-ci.org/twitter/bootstrap)
+
+
+See the bottom of the README for info about the fork.
+
+
 
 Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created and maintained by [Mark Otto](http://twitter.com/mdo) and [Jacob Thornton](http://twitter.com/fat).
 
@@ -55,9 +58,11 @@ Keep track of development and community news.
 
 
 
-## Compiling CSS and JavaScript
+## Compiling CSS and JavaScript (old!)
 
-Bootstrap includes a [makefile](Makefile) with convenient methods for working with the framework. Before getting started, be sure to install [the necessary local dependencies](package.json):
+Bootstrap includes a [makefile](Makefile) with convenient methods for working
+with the framework. Before getting started, be sure to install
+[the necessary local dependencies](package.json):
 
 ```
 $ npm install
@@ -115,3 +120,33 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+
+## Affresco
+
+Affresco is a Bootstrap fork, meant at making it nicer & easier to extend.
+All the LESS stylesheets will be ported to the more powerful SCSS.
+
+
+### Tools of the trade
+
+* ``ruby`` to power the SCSS compilers
+* ``sass`` to compile SCSS files
+* ``compass`` a powerful library for SCSS
+
+
+### Compiling
+
+Add this to your virtualenv ``activate`` script:
+
+```
+export GEM_HOME=$VIRTUAL_ENV
+export GEM_PATH=""
+```
+
+Install dependencies:
+
+```
+gem install sass compass
+```

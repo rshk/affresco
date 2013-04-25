@@ -1,15 +1,9 @@
 {
-    "name": "bootstrap"
+    "name": "affresco"
   , "description": "Sleek, intuitive, and powerful front-end framework for faster and easier web development."
-  , "version": "2.3.1"
+  , "version": "0.1.0"
   , "keywords": ["bootstrap", "css"]
-  , "homepage": "http://twitter.github.com/bootstrap/"
-  , "author": "Twitter Inc."
   , "scripts": { "test": "make test" }
-  , "repository": {
-      "type": "git"
-    , "url": "https://github.com/twitter/bootstrap.git"
-  }
   , "licenses": [
     {
         "type": "Apache-2.0"
