@@ -780,7 +780,7 @@ form.bs-docs-example {
 -------------------------------------------------- */
 
 .bs-docs-sidenav {
-  /*width: 228px;*/
+  width: 228px;
   margin: 30px 0 0;
   padding: 0;
   background-color: #fff;
@@ -833,7 +833,7 @@ form.bs-docs-example {
 }
 .bs-docs-sidenav .active .icon-chevron-right,
 .bs-docs-sidenav .active a:hover .icon-chevron-right {
-  /*background-image: url(../img/glyphicons-halflings-white.png);*/
+  background-image: url(../img/glyphicons-halflings-white.png);
   opacity: 1;
 }
 .bs-docs-sidenav.affix {
@@ -858,10 +858,10 @@ form.bs-docs-example {
     max-width: 970px;
   }
   .bs-docs-sidenav {
-    /*width: 258px;*/
+    width: 258px;
   }
   .bs-docs-sidenav > li > a {
-    /*width: 230px \9;*/ /* Override the previous IE8-9 hack */
+    width: 230px \9; /* Override the previous IE8-9 hack */
   }
 }
 
