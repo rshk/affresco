@@ -609,55 +609,51 @@
 
         @for $index from 1 through $gridColumns {
             .span#{$index} {
-                @include grid-fluid-span($index);
+                @include grid-fluid-span($index, $fluidGridColumnWidth, $fluidGridGutterWidth);
             }
             .offset#{$index} {
-                @include grid-fluid-offset($index);
+                @include grid-fluid-offset($index, $fluidGridColumnWidth, $fluidGridGutterWidth);
             }
             .offset#{$index}:first-child {
-                @include grid-fluid-offset-firstchild($index);
+                @include grid-fluid-offset-firstchild($index, $fluidGridColumnWidth, $fluidGridGutterWidth);
             }
         }
 
     }
 }
 
-@mixin grid-fluid-span($columns) {
+@mixin grid-fluid-span($columns, $colw: $fluidGridColumnWidth, $colg: $fluidGridGutterWidth) {
     width:
-        ($fluidGridColumnWidth * $columns)
-        + ($fluidGridGutterWidth * ($columns - 1));
-    // *width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%);
+        ($colw * $columns)
+        + ($colg * ($columns - 1));
+    // *width: ($colw * $columns) + ($colg * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%);
     *width:
-        ($fluidGridColumnWidth * $columns)
-        + ($fluidGridGutterWidth * ($columns - 1))
+        ($colw * $columns)
+        + ($colg * ($columns - 1))
         - (50px / $gridRowWidth);
 }
 
-@mixin grid-fluid-offset($columns) {
-    margin-left:
-        ($fluidGridColumnWidth * $columns)
-        + ($fluidGridGutterWidth * ($columns - 1))
-        + ($fluidGridGutterWidth*2);
-    // *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%) + ($fluidGridGutterWidth*2) - (.5 / $gridRowWidth * 100 * 1%);
+@mixin grid-fluid-offset($columns, $colw: $fluidGridColumnWidth, $colg: $fluidGridGutterWidth) {
+    margin-left: ($colw * $columns) + ($colg * ($columns - 1)) + ($colg*2);
     *margin-left:
-        ($fluidGridColumnWidth * $columns)
-        + ($fluidGridGutterWidth * ($columns - 1))
+        ($colw * $columns)
+        + ($colg * ($columns - 1))
         - (50px / $gridRowWidth)
-        + ($fluidGridGutterWidth*2)
+        + ($colg*2)
         - (50px / $gridRowWidth);
 }
 
-@mixin grid-fluid-offset-firstchild ($columns) {
+@mixin grid-fluid-offset-firstchild ($columns, $colw: $fluidGridColumnWidth, $colg: $fluidGridGutterWidth) {
     margin-left:
-        ($fluidGridColumnWidth * $columns)
-        + ($fluidGridGutterWidth * ($columns - 1))
-        + ($fluidGridGutterWidth);
-    // *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%) + $fluidGridGutterWidth - (.5 / $gridRowWidth * 100 * 1%);
+        ($colw * $columns)
+        + ($colg * ($columns - 1))
+        + ($colg);
+    // *margin-left: ($colw * $columns) + ($colg * ($columns - 1)) - (.5 / $gridRowWidth * 100 * 1%) + $colg - (.5 / $gridRowWidth * 100 * 1%);
     *margin-left:
-        ($fluidGridColumnWidth * $columns)
-        + ($fluidGridGutterWidth * ($columns - 1))
+        ($colw * $columns)
+        + ($colg * ($columns - 1))
         - (50px / $gridRowWidth)
-        + $fluidGridGutterWidth
+        + $colg
         - (50px / $gridRowWidth);
 }
 
@@ -682,6 +678,6 @@
     }
 }
 
-@mixin grind-input-span($columns) {
-    width: (($gridColumnWidth) * $columns) + ($gridGutterWidth * ($columns - 1)) - 14;
+@mixin grind-input-span($columns, $colw: $gridColumnWidth, $colg: $gridGutterWidth) {
+    width: (($colw) * $columns) + ($colg * ($columns - 1)) - 14;
 }
