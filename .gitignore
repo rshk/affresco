@@ -36,3 +36,6 @@ nbproject
 node_modules
 dist
 /build
+/.tmp
+/docs/assets/*.zip
+/docs/assets/*.tar.gz
