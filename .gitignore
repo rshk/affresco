@@ -11,6 +11,9 @@
 *~
 *.sass-cache
 
+# Build configuration
+/.config.mk
+
 # OS or Editor folders
 .DS_Store
 ._*
