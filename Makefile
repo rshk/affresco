@@ -74,6 +74,7 @@ clean-library:
 
 docs: library
 	$(NODE) docs/build
+	$(SCSS) docs/assets/scss/docs.scss > docs/assets/css/docs.css
 	cp -t docs/assets/css/ $(BUILD_DIR)/css/*.css
 	cp -t docs/assets/js/ js/*.js
 	cp -t docs/assets/js/ js/tests/vendor/jquery.js
