@@ -94,7 +94,7 @@ AFFRESCO_JS_SOURCES := \
 	js/bootstrap-transition.js \
 	js/bootstrap-typeahead.js
 AFFRESCO_JS_FILES :=
-AFFRESCO_JS_MIN_FILES = $(patsubst %.js,%.min.js,$(AFFRESCO_JS_FILES))
+AFFRESCO_JS_FILES_MIN = $(patsubst %.js,%.min.js,$(AFFRESCO_JS_FILES))
 
 ## === More configuration ======================================================
 DISTRIB_TMP := .tmp
@@ -127,7 +127,7 @@ affresco_css: library-dirs \
 	$(AFFRESCO_RESPONSIVE_CSS_FILES) $(AFFRESCO_RESPONSIVE_CSS_FILES_MIN)
 
 affresco_js: library-dirs $(AFFRESCO_JS) $(AFFRESCO_JS_MIN) \
-	$(AFFRESCO_JS_FILES) $(AFFRESCO_JS_MIN_FILES)
+	$(AFFRESCO_JS_FILES) $(AFFRESCO_JS_FILES_MIN)
 
 $(AFFRESCO_CSS): $(AFFRESCO_CSS_COMMON) $(AFFRESCO_CSS_SOURCES)
 	cat $(AFFRESCO_CSS_COMMON) \
@@ -172,7 +172,12 @@ docs: library
 	$(NODE) docs/build
 	$(SCSS) docs/assets/scss/docs.scss > docs/assets/css/docs.css
 	cp -t docs/assets/css/ $(BUILD_DIR)/css/*.css
-	cp -t docs/assets/js/ js/*.js
+	if [ -n  "$(AFFRESCO_JS)" ] || [ -n "$(AFFRESCO_JS_MIN)" ]; then \
+		cp -t docs/assets/js/ $(AFFRESCO_JS) $(AFFRESCO_JS_MIN); \
+	fi
+	if [ -n  "$(AFFRESCO_JS_FILES)" ] || [ -n "$(AFFRESCO_JS_FILES_MIN)" ]; then \
+		cp -t docs/assets/js/ $(AFFRESCO_JS_FILES) $(AFFRESCO_JS_FILES_MIN); \
+	fi
 	cp -t docs/assets/js/ js/tests/vendor/jquery.js
 
 clean-docs:
