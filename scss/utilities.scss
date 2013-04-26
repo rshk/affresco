@@ -28,3 +28,7 @@
 .affix {
   position: fixed;
 }
+
+.clearfix {
+    @include clearfix();
+}
