@@ -67,29 +67,47 @@
 // --------------------------------------------------
 
 // Large
+.btn-xxlarge {
+  padding: $paddingXXLarge;
+  font-size: $fontSizeXXLarge;
+  @include border-radius($borderRadiusXXLarge);
+  [class^="icon-"],
+  [class*=" icon-"] {
+    margin-top: 10px;
+  }
+}
+
+// Large
+.btn-xlarge {
+  padding: $paddingXLarge;
+  font-size: $fontSizeXLarge;
+  @include border-radius($borderRadiusXLarge);
+  [class^="icon-"],
+  [class*=" icon-"] {
+    margin-top: 8px;
+  }
+}
+
+// Large
 .btn-large {
   padding: $paddingLarge;
   font-size: $fontSizeLarge;
   @include border-radius($borderRadiusLarge);
-}
-.btn-large [class^="icon-"],
-.btn-large [class*=" icon-"] {
-  margin-top: 4px;
+  [class^="icon-"],
+  [class*=" icon-"] {
+    margin-top: 4px;
+  }
 }
 
 // Small
 .btn-small {
   padding: $paddingSmall;
   font-size: $fontSizeSmall;
-@include border-radius($borderRadiusSmall);
-}
-.btn-small [class^="icon-"],
-.btn-small [class*=" icon-"] {
-  margin-top: 0;
-}
-.btn-mini [class^="icon-"],
-.btn-mini [class*=" icon-"] {
-  margin-top: -1px;
+  @include border-radius($borderRadiusSmall);
+  [class^="icon-"],
+  [class*=" icon-"] {
+    margin-top: 0;
+  }
 }
 
 // Mini
@@ -97,6 +115,10 @@
   padding: $paddingMini;
   font-size: $fontSizeMini;
   @include border-radius($borderRadiusSmall);
+  [class^="icon-"],
+  [class*=" icon-"] {
+    margin-top: -1px;
+  }
 }
 
 
@@ -164,6 +186,12 @@ input[type="button"] {
 // Inverse appears as dark gray
 .btn-inverse {
   @include buttonBackground($btnInverseBackground, $btnInverseBackgroundHighlight);
+}
+.btn-pink {
+  @include buttonBackground($btnPinkBackground, $btnPinkBackgroundHighlight);
+}
+.btn-purple {
+  @include buttonBackground($btnPurpleBackground, $btnPurpleBackgroundHighlight);
 }
 
 
